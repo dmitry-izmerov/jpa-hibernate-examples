@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>java-persistence-with-hibernate-20</artifactId>
+    <artifactId>java-persistence-with-hibernate</artifactId>
 
     <name>hibernate-examples</name>
     <description>hibernate examples by book Java persistence with hibernate 2nd</description>
