@@ -1,9 +1,7 @@
 package ru.demi;
 
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Session;
 import ru.demi.model.Message;
-import ru.demi.util.HibernateUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -25,6 +23,12 @@ public class App {
             tx = entityManager.getTransaction();
             tx.begin();
 
+            // save new message
+            // Message message = new Message();
+            // message.setText("new message");
+            // entityManager.persist(message);
+
+            // implicitly update message
             List<Message> messages = entityManager.createQuery("select m from Message m", Message.class)
                 .getResultList();
             log.info(messages.get(0).getText());
