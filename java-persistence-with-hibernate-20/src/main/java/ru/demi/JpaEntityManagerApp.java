@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Slf4j
-public class App {
+public class JpaEntityManagerApp {
     public static void main(String[] args) {
         EntityManagerFactory entityManagerFactory = null;
         EntityManager entityManager = null;
