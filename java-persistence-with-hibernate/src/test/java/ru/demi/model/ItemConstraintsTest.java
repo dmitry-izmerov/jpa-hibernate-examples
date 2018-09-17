@@ -33,7 +33,9 @@ public class ItemConstraintsTest {
         Set<ConstraintViolation<Item>> constraintViolations = validator.validate(item);
 
         assertEquals(1, constraintViolations.size());
-        assertEquals("должно быть задано", constraintViolations.iterator().next().getMessage());
+        ConstraintViolation<Item> constraintViolation = constraintViolations.iterator().next();
+        assertEquals("name", constraintViolation.getPropertyPath().iterator().next().getName());
+        assertEquals("должно быть задано", constraintViolation.getMessage());
     }
 
     @Test
@@ -44,7 +46,9 @@ public class ItemConstraintsTest {
         Set<ConstraintViolation<Item>> constraintViolations = validator.validate(item);
 
         assertEquals(1, constraintViolations.size());
-        assertEquals("размер должен быть между 2 и 255", constraintViolations.iterator().next().getMessage());
+        ConstraintViolation<Item> constraintViolation = constraintViolations.iterator().next();
+        assertEquals("name", constraintViolation.getPropertyPath().iterator().next().getName());
+        assertEquals("размер должен быть между 2 и 255", constraintViolation.getMessage());
     }
 
     @Test
@@ -55,6 +59,8 @@ public class ItemConstraintsTest {
         Set<ConstraintViolation<Item>> constraintViolations = validator.validate(item);
 
         assertEquals(1, constraintViolations.size());
-        assertEquals("должно быть в будущем", constraintViolations.iterator().next().getMessage());
+        ConstraintViolation<Item> constraintViolation = constraintViolations.iterator().next();
+        assertEquals("auctionEnd", constraintViolation.getPropertyPath().iterator().next().getName());
+        assertEquals("должно быть в будущем", constraintViolation.getMessage());
     }
 }
