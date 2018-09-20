@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -27,8 +30,14 @@ public class Item {
         min = 2,
         max = 255
     )
+    @Access(AccessType.PROPERTY)
+    @Column(name = "ITEM_NAME")
     private String name;
 
     @Future
     private Date auctionEnd;
+
+    public void setName(String name) {
+        this.name = !name.startsWith("auction:") ? "auction: " + name : name;
+    }
 }

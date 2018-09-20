@@ -28,7 +28,7 @@ public class ItemConstraintsTest {
     @Test
     public void shouldReturnNotNullConstraint() {
         Date future = Date.from(Instant.now().plus(Duration.ofDays(2)));
-        Item item = new Item(null, future);
+        Item item = new Item(1L, null, future);
 
         Set<ConstraintViolation<Item>> constraintViolations = validator.validate(item);
 
@@ -41,7 +41,7 @@ public class ItemConstraintsTest {
     @Test
     public void shouldReturnSizeConstraint() {
         Date future = Date.from(Instant.now().plus(Duration.ofDays(2)));
-        Item item = new Item("n", future);
+        Item item = new Item(1L, "n", future);
 
         Set<ConstraintViolation<Item>> constraintViolations = validator.validate(item);
 
@@ -54,7 +54,7 @@ public class ItemConstraintsTest {
     @Test
     public void shouldReturnFutureConstraint() {
         Date past = Date.from(Instant.now().minus(Duration.ofDays(2)));
-        Item item = new Item("some", past);
+        Item item = new Item(1L, "some", past);
 
         Set<ConstraintViolation<Item>> constraintViolations = validator.validate(item);
 
