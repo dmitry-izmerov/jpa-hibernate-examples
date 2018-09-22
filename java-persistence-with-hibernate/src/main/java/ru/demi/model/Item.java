@@ -10,6 +10,8 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
@@ -49,6 +51,10 @@ public class Item {
     @ColumnDefault("1.00")
     @Generated(GenerationTime.INSERT)
     private BigDecimal initialPrice;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private AuctionType auctionType = AuctionType.HIGHEST_BID;
 
     public void setName(String name) {
         this.name = !name.startsWith("auction:") ? "auction: " + name : name;
