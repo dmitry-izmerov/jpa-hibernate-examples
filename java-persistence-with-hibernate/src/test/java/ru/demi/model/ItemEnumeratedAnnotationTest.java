@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class ItemEnumeratedAnnotationTest extends BaseEntityTest {
 
     @Test
-    public void shouldSetGeneratedValues() {
+    public void shouldSaveEnumStringValue() {
         session.beginTransaction();
 
         Item item = new Item();
