@@ -1,8 +1,10 @@
 package ru.demi.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -10,15 +12,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 public class Item {
 
     @Id
@@ -36,6 +39,16 @@ public class Item {
 
     @Future
     private Date auctionEnd;
+
+    @Column(updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+    private Date createdOn;
+
+    @Column(insertable = false)
+    @ColumnDefault("1.00")
+    @Generated(GenerationTime.INSERT)
+    private BigDecimal initialPrice;
 
     public void setName(String name) {
         this.name = !name.startsWith("auction:") ? "auction: " + name : name;

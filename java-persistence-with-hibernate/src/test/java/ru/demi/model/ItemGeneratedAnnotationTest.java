@@ -7,12 +7,12 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-public class ItemAccessPropertyTest extends BaseEntityTest {
+public class ItemGeneratedAnnotationTest extends BaseEntityTest {
 
     @Test
-    public void shouldSetNameBySetter() {
+    public void shouldSetGeneratedValues() {
         session.beginTransaction();
 
         Item item = new Item();
@@ -25,7 +25,7 @@ public class ItemAccessPropertyTest extends BaseEntityTest {
         session.clear();
 
         Item saved = session.find(Item.class, item.getId());
-
-        assertEquals("auction: " + name, saved.getName());
+        assertNotNull(saved.getCreatedOn());
+        assertNotNull(saved.getInitialPrice());
     }
 }
