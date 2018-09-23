@@ -5,7 +5,7 @@ import ru.demi.BaseEntityTest;
 
 import static org.junit.Assert.assertNotNull;
 
-public class TablePerConcreteClassWithImplicitPolymorphismTest extends BaseEntityTest {
+public class TablePerConcreteClassWithUnionsTest extends BaseEntityTest {
 
     @Test
     public void shouldSaveBankAccount() {
