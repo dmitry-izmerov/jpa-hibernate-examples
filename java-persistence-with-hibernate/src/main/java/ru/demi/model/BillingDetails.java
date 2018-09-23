@@ -3,6 +3,8 @@ package ru.demi.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,7 +15,8 @@ import javax.validation.constraints.NotNull;
 @Data
 @EqualsAndHashCode(of = "id")
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "BD_TYPE")
 public abstract class BillingDetails {
 
     @Id
@@ -21,5 +24,6 @@ public abstract class BillingDetails {
     protected Long id;
 
     @NotNull
+    @Column(nullable = false)
     protected String owner;
 }
