@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
@@ -12,7 +11,6 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode(callSuper = true, of = "id")
 @ToString(callSuper = true)
 @Entity
-@DiscriminatorValue("BA")
 public class BankAccount extends BillingDetails {
 
     @NotNull

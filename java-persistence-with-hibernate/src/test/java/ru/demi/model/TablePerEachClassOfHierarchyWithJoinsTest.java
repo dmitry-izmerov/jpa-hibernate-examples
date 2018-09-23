@@ -5,7 +5,7 @@ import ru.demi.BaseEntityTest;
 
 import static org.junit.Assert.assertNotNull;
 
-public class TablePerClassHierarchyTest extends BaseEntityTest {
+public class TablePerEachClassOfHierarchyWithJoinsTest extends BaseEntityTest {
 
     @Test
     public void shouldSaveBankAccount() {

@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,8 +14,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @EqualsAndHashCode(of = "id")
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "BD_TYPE")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class BillingDetails {
 
     @Id

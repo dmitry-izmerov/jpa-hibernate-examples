@@ -4,15 +4,15 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotNull;
 
 @Data
 @EqualsAndHashCode(callSuper = true, of = "id")
 @ToString(callSuper = true)
 @Entity
-@DiscriminatorValue("CC")
+@PrimaryKeyJoinColumn(name = "creditCardId")
 public class CreditCard extends BillingDetails {
 
     @NotNull
