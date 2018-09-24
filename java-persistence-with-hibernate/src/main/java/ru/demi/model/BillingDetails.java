@@ -5,10 +5,12 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -24,4 +26,7 @@ public abstract class BillingDetails {
     @NotNull
     @Column(nullable = false)
     protected String owner;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 }

@@ -5,9 +5,11 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -42,6 +44,11 @@ public class User implements Serializable {
     )
     private Address billingAddress;*/
 
-    @ManyToOne
-    private BillingDetails defaultBilling;
+    @OneToMany(mappedBy = "user")
+    private Set<BillingDetails> billingDetails = new HashSet<>();
+
+    public void addBillingDetails(BillingDetails details) {
+        details.setUser(this);
+        billingDetails.add(details);
+    }
 }
