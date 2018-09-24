@@ -2,11 +2,10 @@ package ru.demi.model;
 
 import lombok.Data;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 
@@ -19,7 +18,7 @@ public class User implements Serializable {
     @GeneratedValue
     private Long id;
 
-    private Address homeAddress;
+    /*private Address homeAddress;
 
     @AttributeOverride(
         name = "country",
@@ -41,5 +40,8 @@ public class User implements Serializable {
         name = "zipCode",
         column = @Column(name = "BILLING_ZIPCODE")
     )
-    private Address billingAddress;
+    private Address billingAddress;*/
+
+    @ManyToOne
+    private BillingDetails defaultBilling;
 }
