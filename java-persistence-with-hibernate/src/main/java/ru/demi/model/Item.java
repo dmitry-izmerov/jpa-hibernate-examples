@@ -5,12 +5,10 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
-import ru.demi.converter.MonetaryAmountConverter;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -57,11 +55,6 @@ public class Item {
     @NotNull
     @Enumerated(EnumType.STRING)
     private AuctionType auctionType = AuctionType.HIGHEST_BID;
-
-    @NotNull
-    @Convert(converter = MonetaryAmountConverter.class) // optional because of autoApply = true
-    @Column(name = "PRICE", length = 63)
-    private MonetaryAmount buyNowPrice;
 
     public void setName(String name) {
         this.name = !name.startsWith("auction:") ? "auction: " + name : name;

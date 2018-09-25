@@ -16,6 +16,7 @@
 
         <mapping class="ru.demi.model.Address"/>
         <mapping class="ru.demi.model.BankAccount"/>
+        <mapping class="ru.demi.model.Bid"/>
         <mapping class="ru.demi.model.CreditCard"/>
         <mapping class="ru.demi.model.Item"/>
         <mapping class="ru.demi.model.Message"/>
