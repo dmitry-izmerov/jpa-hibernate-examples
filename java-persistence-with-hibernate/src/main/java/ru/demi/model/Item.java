@@ -61,7 +61,7 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private AuctionType auctionType = AuctionType.HIGHEST_BID;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "item", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "item", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Set<Bid> bids = new HashSet<>();
 
     public void setName(String name) {
