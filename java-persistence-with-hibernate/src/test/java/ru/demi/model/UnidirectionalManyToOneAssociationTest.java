@@ -25,7 +25,6 @@ public class UnidirectionalManyToOneAssociationTest extends BaseEntityTest {
         bid.setAmount(BigDecimal.ONE);
         bid.setItem(item);
 
-        session.persist(item);
         session.persist(bid);
 
         session.getTransaction().commit();
