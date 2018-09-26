@@ -8,9 +8,9 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
 
-public class UnidirectionalManyToOneAssociationTest extends BaseEntityTest {
+public class BidirectionalAssociationTest extends BaseEntityTest {
 
     @Test
     public void shouldSetAssocation() {
@@ -24,14 +24,15 @@ public class UnidirectionalManyToOneAssociationTest extends BaseEntityTest {
         Bid bid = new Bid();
         bid.setAmount(BigDecimal.ONE);
         bid.setItem(item);
+        item.getBids().add(bid);
 
-        session.persist(bid);
+        session.persist(item);
 
         session.getTransaction().commit();
         session.clear();
 
-        Bid saved = session.find(Bid.class, bid.getId());
+        Item saved = session.find(Item.class, item.getId());
 
-        assertNotNull(saved.getItem());
+        assertEquals(1, saved.getBids().size());
     }
 }

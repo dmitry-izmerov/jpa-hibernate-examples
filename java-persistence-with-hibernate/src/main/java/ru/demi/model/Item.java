@@ -8,12 +8,15 @@ import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
@@ -21,6 +24,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -55,6 +60,9 @@ public class Item {
     @NotNull
     @Enumerated(EnumType.STRING)
     private AuctionType auctionType = AuctionType.HIGHEST_BID;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "item", cascade = CascadeType.ALL)
+    private Set<Bid> bids = new HashSet<>();
 
     public void setName(String name) {
         this.name = !name.startsWith("auction:") ? "auction: " + name : name;
