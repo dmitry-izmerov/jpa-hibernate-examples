@@ -2,6 +2,7 @@ package ru.demi.model;
 
 import lombok.Data;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -47,8 +48,16 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private Set<BillingDetails> billingDetails = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "buyer")
+    private Set<Item> boughtItems = new HashSet<>();
+
     public void addBillingDetails(BillingDetails details) {
         details.setUser(this);
         billingDetails.add(details);
+    }
+
+    public void addBoughtItem(Item item) {
+        item.setBuyer(this);
+        boughtItems.add(item);
     }
 }

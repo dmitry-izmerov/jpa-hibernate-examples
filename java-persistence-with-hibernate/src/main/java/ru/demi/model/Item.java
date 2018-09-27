@@ -1,6 +1,7 @@
 package ru.demi.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Generated;
@@ -16,6 +17,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,6 +33,7 @@ import java.util.Set;
 
 @Data
 @Entity
+@EqualsAndHashCode(of = "id")
 public class Item {
 
     @Id
@@ -63,6 +68,14 @@ public class Item {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "item", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Set<Bid> bids = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "item_buyer",
+        joinColumns = @JoinColumn(name = "item_id"),
+        inverseJoinColumns = @JoinColumn(nullable = false)
+    )
+    private User buyer;
 
     public void setName(String name) {
         this.name = !name.startsWith("auction:") ? "auction: " + name : name;
