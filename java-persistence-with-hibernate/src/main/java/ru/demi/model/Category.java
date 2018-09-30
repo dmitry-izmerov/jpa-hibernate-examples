@@ -4,13 +4,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,11 +25,6 @@ public class Category {
     @NotNull
     private String name;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(
-        name = "category_item",
-        joinColumns = @JoinColumn(name = "category_id"),
-        inverseJoinColumns = @JoinColumn(name = "item_id")
-    )
-    private Set<Item> items = new HashSet<>();
+    @OneToMany(mappedBy = "category")
+    private Set<CategorizedItem> categorizedItems = new HashSet<>();
 }

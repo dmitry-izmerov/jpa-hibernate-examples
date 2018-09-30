@@ -19,7 +19,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -78,8 +77,8 @@ public class Item {
     )
     private User buyer;
 
-    @ManyToMany(mappedBy = "items")
-    private Set<Category> categories = new HashSet<>();
+    @OneToMany(mappedBy = "item")
+    private Set<CategorizedItem> categorizedItems = new HashSet<>();
 
     public void setName(String name) {
         this.name = !name.startsWith("auction:") ? "auction: " + name : name;
