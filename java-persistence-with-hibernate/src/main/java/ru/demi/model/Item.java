@@ -4,8 +4,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.OptimisticLockType;
+import org.hibernate.annotations.OptimisticLocking;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -23,7 +26,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -33,16 +35,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@Entity
 @EqualsAndHashCode(of = "id")
+@Entity
+@OptimisticLocking(type = OptimisticLockType.ALL)
+@DynamicUpdate
 public class Item {
 
     @Id
     @GeneratedValue
     private Long id;
-
-    @Version
-    private long version;
 
     @NotNull
     @Size(
