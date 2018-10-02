@@ -9,6 +9,8 @@ import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 import org.hibernate.annotations.OptimisticLockType;
 import org.hibernate.annotations.OptimisticLocking;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -36,6 +38,7 @@ import java.util.Set;
 
 @Data
 @EqualsAndHashCode(of = "id")
+@Audited
 @Entity
 @OptimisticLocking(type = OptimisticLockType.ALL)
 @DynamicUpdate
@@ -71,9 +74,11 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private AuctionType auctionType = AuctionType.HIGHEST_BID;
 
+    @NotAudited
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "item", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Set<Bid> bids = new HashSet<>();
 
+    @NotAudited
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(
         name = "item_buyer",
@@ -82,6 +87,7 @@ public class Item {
     )
     private User buyer;
 
+    @NotAudited
     @OneToMany(mappedBy = "item")
     private Set<CategorizedItem> categorizedItems = new HashSet<>();
 
